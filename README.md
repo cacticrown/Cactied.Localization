@@ -5,7 +5,7 @@ Cactied.Localization is a minimal, dependency-free localization library written 
 ## Features
 
 - **Lightweight and fast:** no external dependencies
-- **File-based:** supports a stripped down TOML format
+- **File-based:** supports a stripped down version of the TOML format
 - **Simple API for loading and retrieving translations**
 - **Supports runtime language switching**
 - **Optional fallback language support**
