@@ -2,6 +2,11 @@
 
 public static class LocalizationParser
 {
+    /// <summary>
+    /// Returns a <see cref="Localization"/> from a toml-like string.
+    /// </summary>
+    /// <param name="content"></param>
+    /// <returns></returns>
     public static Localization Parse(string content)
     {
         string lang = string.Empty;

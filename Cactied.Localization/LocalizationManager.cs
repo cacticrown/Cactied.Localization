@@ -8,11 +8,11 @@ public static class LocalizationManager
     /// </summary>
     /// <remarks>The dictionary keys should be language codes (e.g., "en-US", "fr-FR"), and the
     /// values are instances of the <see cref="Localization"/> class.</remarks>
-    public static Dictionary<string, Localization> Localizations = new();
+    private static Dictionary<string, Localization> localizations = new();
 
     public static string DefaultFallbackLanguage = "en";
 
-    #region Loading Localizations
+    #region Loading localizations
 
     /// <summary>
     /// Loads localization data from a string.
@@ -21,7 +21,7 @@ public static class LocalizationManager
     public static void LoadLocalizationFromString(string fileContent)
     {
         Localization localization = LocalizationParser.Parse(fileContent);
-        Localizations[localization.Language] = localization;
+        localizations[localization.Language] = localization;
     }
 
     /// <summary>
@@ -42,9 +42,17 @@ public static class LocalizationManager
 
     #endregion
 
+    public static void RemoveLocalization(string languageCode) => localizations.Remove(languageCode);
+
+    public static void RemoveAlllocalizations() => localizations.Clear();
+
+    public static void AddLocalization(string languageCode, Localization localization) => localizations.Add(languageCode, localization);
+
+    public static bool HasLocalization(string languageCode) => localizations.ContainsKey(languageCode);
+
     public static string GetLocalizedString(string key, string languageCode)
     {
-        if(Localizations.TryGetValue(languageCode, out var localization))
+        if(localizations.TryGetValue(languageCode, out var localization))
         {
             var translation = localization.GetTranslation(key);
             if(translation is not null)
@@ -53,7 +61,7 @@ public static class LocalizationManager
             }
 
             if(!string.IsNullOrEmpty(localization.FallbackLanguage) &&
-               Localizations.TryGetValue(localization.FallbackLanguage, out var fallbackLocalization))
+               localizations.TryGetValue(localization.FallbackLanguage, out var fallbackLocalization))
             {
                 var fallbackTranslation = fallbackLocalization.GetTranslation(key);
                 if(fallbackTranslation != null)
@@ -63,7 +71,7 @@ public static class LocalizationManager
             }
         }
 
-        if (languageCode != DefaultFallbackLanguage && Localizations.ContainsKey(DefaultFallbackLanguage))
+        if (languageCode != DefaultFallbackLanguage && localizations.ContainsKey(DefaultFallbackLanguage))
         {
             return GetLocalizedString(key, DefaultFallbackLanguage);
         }

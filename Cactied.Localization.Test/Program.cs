@@ -8,7 +8,7 @@ internal class Program
         LocalizationManager.LoadLocalizationFromFile("Translations/de.clf");
 
         // Localizations can also be loading in code
-        LocalizationManager.Localizations.Add("en-uk", new Localization("en-uk", "en", new Dictionary<string, string>
+        LocalizationManager.AddLocalization("en-uk", new Localization("en-uk", "en", new Dictionary<string, string>
         {
             {"menu.play", "Wanna play mate?" },
             {"menu.quit", "Why you wanna quit mate?" },
