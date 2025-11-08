@@ -1,0 +1,9 @@
+[meta]
+language = "de"
+# the fallback language to use if a translation is missing
+fallback = "en"
+
+[translations]
+menu.play = "Spielen"
+menu.quit = "Verlassen"
+# dialog.welcome is missing, so it will fallback to the english translation
